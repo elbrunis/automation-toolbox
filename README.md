@@ -7,60 +7,81 @@ Collection of **Python** and **Bash** scripts to automate daily **System Adminis
 
 ## 📂 Scripts Included
 
-### 1. File Organizer (`organizer.py`)
+### 1️⃣ File Organizer (`organizer.py`)
 
 **Logic:**  
-Scan directory → Detect extension → Move to subfolder
+Scan directory → Detect file extension → Move files to subfolders based on extension.
 
 **Examples:**
 - `.jpg` → `/Images`
 - `.pdf` → `/Documents`
 
-**Usage:**
+**Steps to execute:**
 ```bash
 python3 organizer.py
-2. Auto Backup (backup.py)
+2️⃣ Auto Backup (backup.py)
 Features:
 
-✓ Compresses target folder into a ZIP
+Compresses target folder into a ZIP file
 
-✓ Automatic timestamp naming
+Automatic timestamp naming
 
-✓ Retention policy: deletes backups older than 7 days
+Retention policy: deletes backups older than 7 days
 
-Usage:
+Steps to execute:
 
 bash
 Copiar código
 python3 backup.py
-3. System Monitor (monitor.sh)
-Real-time Dashboard Metrics:
+3️⃣ System Monitor (monitor.sh)
+Real-time dashboard metrics:
 
-🧠 RAM usage
+RAM usage
 
-💾 Disk usage (root /)
+Disk usage (root / partition)
 
-⚙️ CPU: Top 5 consuming processes
+CPU: Top 5 consuming processes
 
-Usage:
+Steps to execute:
 
 bash
 Copiar código
 chmod +x monitor.sh
 ./monitor.sh
-🤖 Automation (Cron Job)
-Schedule: Daily at 20:00 (8:00 PM)
+🤖 Automation with Cron Job
+Cron allows you to schedule scripts to run automatically at a specific time.
 
-Crontab configuration:
-
+🔹 Step 1: Open the crontab editor
 bash
 Copiar código
-# m h  dom mon dow   command
-0 20 * * * /usr/bin/python3 /path/to/automation-toolbox/backup.py
-🎓 Notes
-Created as part of the DevOps / SysAdmin Bootcamp.
+crontab -e
+This opens the cron configuration file for the current user.
 
-markdown
+🔹 Step 2: Add the scheduled task
+bash
 Copiar código
+0 20 * * * /usr/bin/python3 /path/to/automation-toolbox/backup.py
+🔹 Step 3: Understand the cron syntax
+bash
+Copiar código
+# ┌──────── minute (0 - 59)
+# │ ┌────── hour (0 - 23)
+# │ │ ┌──── day of month (1 - 31)
+# │ │ │ ┌── month (1 - 12)
+# │ │ │ │ ┌─ day of week (0 - 7) (Sunday = 0 or 7)
+# │ │ │ │ │
+# 0 20 * * * command
+Explanation of this schedule:
 
-Si lo quieres **aún más minimal**, o adaptado a **README.md**, **Obsidian**,
+0 → At minute 0
+
+20 → At 20:00 (8:00 PM)
+
+* * * → Every day, every month, every weekday
+
+/usr/bin/python3 → Absolute path to Python interpreter
+
+/path/to/automation-toolbox/backup.py → Script to execute
+
+🔹 Step 4: Save and exit
+Once saved, the cron job will run automatically every day at 20:00.
