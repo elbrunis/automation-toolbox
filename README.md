@@ -1,87 +1,116 @@
-# 🛠️ Automation Toolbox
+<div align="center">
+  <h2 align="center">Automation Toolbox</h2>
 
-## 📄 Description
-Collection of **Python** and **Bash** scripts to automate daily **System Administration** tasks.
+  <p align="center">
+    <strong>A lightweight collection of Python and Bash scripts for automating common system administration chores: file organization, directory backup with retention, and real-time resource monitoring.</strong>
+    <br />
+    <br />
+    <a href="https://github.com/elbrunis/automation-toolbox/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/elbrunis/automation-toolbox/issues">Request Feature</a>
+  </p>
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+    <img src="https://img.shields.io/badge/Build-Passing-brightgreen.svg" alt="Build Status">
+  </p>
+</div>
+
+## 📑 Table of Contents
+- [✨ Key Features](#-key-features)
+- [🛠 Tech Stack](#-tech-stack)
+- [🚀 Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [💡 Usage](#-usage)
+- [🗺 Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ---
 
-## 📂 Scripts Included
+## ✨ Key Features
+* **File Organizer:** Scans a target directory and automatically moves files into categorized subfolders (Images, Documents, Videos, Compressed, Executables, Installers) based on file extension.
+* **Auto Backup with Retention:** Compresses a source directory into a timestamped `.zip` archive and automatically purges backups older than 7 days (configurable).
+* **System Resource Monitor:** Displays a colorized real-time dashboard showing CPU load, RAM usage, disk usage, and the top-5 CPU-consuming processes.
+* **Cron-Ready:** All scripts are designed to be scheduled via `cron` for hands-free automation.
 
-### 1️⃣ File Organizer (`organizer.py`)
+---
 
-**Logic:**  
-Scan directory → Detect file extension → Move files to subfolders based on extension.
+## 🛠 Tech Stack
 
-**Examples:**
-- `.jpg` → `/Images`
-- `.pdf` → `/Documents`
+| Category | Technologies |
+| :--- | :--- |
+| **Core** | Python 3, Bash |
+| **Tools** | POSIX utilities (`top`, `free`, `df`, `ps`, `awk`) |
 
-**Steps to execute:**
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to set up the project locally.
+
+### Prerequisites
+* Python 3
+* Bash (`/bin/bash`)
+* Standard POSIX tools (pre-installed on all Linux distributions)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/elbrunis/automation-toolbox.git
+```
+
+2. Make the shell script executable:
+```bash
+cd automation-toolbox
+chmod +x monitor.sh
+```
+
+No additional dependencies required — all Python scripts use only the standard library.
+
+---
+
+## 💡 Usage
+
+**File Organizer:**
 ```bash
 python3 organizer.py
-2️⃣ Auto Backup (backup.py)
-Features:
+```
 
-Compresses target folder into a ZIP file
-
-Automatic timestamp naming
-
-Retention policy: deletes backups older than 7 days
-
-Steps to execute:
-
-bash
-Copiar código
+**Auto Backup:**
+```bash
 python3 backup.py
-3️⃣ System Monitor (monitor.sh)
-Real-time dashboard metrics:
+```
 
-RAM usage
-
-Disk usage (root / partition)
-
-CPU: Top 5 consuming processes
-
-Steps to execute:
-
-bash
-Copiar código
-chmod +x monitor.sh
+**System Monitor:**
+```bash
 ./monitor.sh
-🤖 Automation with Cron Job
-Cron allows you to schedule scripts to run automatically at a specific time.
+```
 
-🔹 Step 1: Open the crontab editor
-bash
-Copiar código
+**Schedule with Cron:**
+```bash
 crontab -e
-This opens the cron configuration file for the current user.
+# Add: 0 20 * * * /usr/bin/python3 /path/to/backup.py
+```
 
-🔹 Step 2: Add the scheduled task
-bash
-Copiar código
-0 20 * * * /usr/bin/python3 /path/to/automation-toolbox/backup.py
-🔹 Step 3: Understand the cron syntax
-bash
-Copiar código
-# ┌──────── minute (0 - 59)
-# │ ┌────── hour (0 - 23)
-# │ │ ┌──── day of month (1 - 31)
-# │ │ │ ┌── month (1 - 12)
-# │ │ │ │ ┌─ day of week (0 - 7) (Sunday = 0 or 7)
-# │ │ │ │ │
-# 0 20 * * * command
-Explanation of this schedule:
+---
 
-0 → At minute 0
+## 🗺 Roadmap
 
-20 → At 20:00 (8:00 PM)
+- [ ] Add CLI argument parsing for configurable paths
+- [ ] Implement logging to file
+- [ ] Add email/Slack notifications for backup status
 
-* * * → Every day, every month, every weekday
+---
 
-/usr/bin/python3 → Absolute path to Python interpreter
+## 🤝 Contributing
 
-/path/to/automation-toolbox/backup.py → Script to execute
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-🔹 Step 4: Save and exit
-Once saved, the cron job will run automatically every day at 20:00.
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
